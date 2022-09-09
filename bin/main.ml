@@ -16,7 +16,9 @@ let main () =
   |> Counter.to_list
   |> List.sort ~compare:(fun (_, x) (_, y) -> Int.descending x y)
   |> (fun l -> List.take l 10)
-  |> List.iter ~f:(fun (line, count) -> printf "%3d: %s\n" count line)
+  |> List.iter ~f:(fun (line, count) -> printf "%3d: %s\n" count line);
+  0
 
 let () =
-  if (Caml.__FILE__ = "//toplevel//") then () else main () 
+  Caml.exit
+    (if (Caml.__FILE__ = "//toplevel//") then 0 else main ())
